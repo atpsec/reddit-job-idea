@@ -1,46 +1,58 @@
 <!doctype html>
-<html lang="tr">
+<html lang="tr" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#f2efe6">
+  <meta name="theme-color" content="#fff8e8">
   <title>Reddit Fırsat Radarı</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div class="sun-orb" aria-hidden="true"></div>
+  <div class="spark spark-a" aria-hidden="true">✦</div>
+  <div class="spark spark-b" aria-hidden="true">✺</div>
+
   <header class="masthead">
     <div class="identity">
-      <div class="edition">ATPS / RESEARCH DESK — 01</div>
-      <h1>Reddit<br>Fırsat Radarı</h1>
-      <p class="subtitle">İnsanların şikâyet ettiği, para vermeye razı olduğu ve hâlâ kötü çözülen işleri ayıkla.</p>
+      <div class="edition" data-i18n="edition">ATPS / FIRSAT MASASI — 01</div>
+      <h1><span>Reddit</span><br><span data-i18n="titleLine">Fırsat Radarı</span></h1>
+      <p class="subtitle" data-i18n="subtitle">İnsanların gerçekten dert ettiği problemleri bul, sinyalleri topla, fikre dönüştür.</p>
+      <div class="mood-strip" aria-hidden="true"><span>IDEA</span><i>●</i><span>BUILD</span><i>●</i><span>SHIP</span><i>●</i><span>LEARN</span></div>
     </div>
+
     <div class="header-side">
-      <div class="live-stamp"><span></span> CANLI KAYNAK</div>
+      <div class="top-controls">
+        <div class="live-stamp"><span></span> <b data-i18n="liveSource">CANLI KAYNAK</b></div>
+        <div class="switchers" aria-label="Preferences">
+          <button id="langToggle" class="round-control" type="button" aria-label="Change language">EN</button>
+          <button id="themeToggle" class="round-control" type="button" aria-label="Change theme">☾</button>
+        </div>
+      </div>
       <div class="actions">
-        <button id="refreshLive">Akışı yenile ↻</button>
-        <button id="export">Dışa aktar</button>
-        <label>İçe aktar<input id="import" type="file" accept="application/json"></label>
-        <button id="add" class="primary">Yeni fikir +</button>
+        <button id="refreshLive" data-i18n="refresh">Akışı yenile ↻</button>
+        <button id="export" data-i18n="export">Dışa aktar</button>
+        <label><span data-i18n="import">İçe aktar</span><input id="import" type="file" accept="application/json"></label>
+        <button id="add" class="primary" data-i18n="newIdea">Yeni fikir +</button>
       </div>
     </div>
   </header>
 
   <main>
-    <section id="stats" class="stats" aria-label="Özet metrikler"></section>
+    <section id="stats" class="stats" aria-label="Summary metrics"></section>
 
     <div class="workbench">
-      <nav aria-label="Görünümler">
-        <button data-view="live" class="active">01 / Canlı akış</button>
-        <button data-view="dashboard">02 / Özet</button>
-        <button data-view="all">03 / Fikir havuzu</button>
+      <nav aria-label="Views">
+        <button data-view="live" class="active" data-i18n="navLive">01 / Canlı akış</button>
+        <button data-view="dashboard" data-i18n="navDashboard">02 / Özet</button>
+        <button data-view="all" data-i18n="navIdeas">03 / Fikir havuzu</button>
         <button data-view="top10">04 / Top 10</button>
-        <button data-view="review">05 / Kontrol</button>
+        <button data-view="review" data-i18n="navReview">05 / Kontrol</button>
       </nav>
 
       <section class="toolbar">
-        <label class="search-field"><span>ARAMA</span><input id="q" placeholder="problem, ürün, müşteri, subreddit..."></label>
-        <label><span>KATEGORİ</span><select id="cat"><option value="">Tümü</option></select></label>
-        <label><span>DURUM</span><select id="status"><option value="">Tümü</option></select></label>
+        <label class="search-field"><span data-i18n="search">ARAMA</span><input id="q" data-i18n-placeholder="searchPlaceholder" placeholder="problem, ürün, müşteri, subreddit..."></label>
+        <label><span data-i18n="category">KATEGORİ</span><select id="cat"><option value="">Tümü</option></select></label>
+        <label><span data-i18n="status">DURUM</span><select id="status"><option value="">Tümü</option></select></label>
       </section>
     </div>
 
@@ -50,21 +62,21 @@
 
   <dialog id="dlg">
     <form id="form">
-      <div class="dialog-head"><span>FİKİR KAYDI</span><button type="button" id="cancel" aria-label="Kapat">×</button></div>
+      <div class="dialog-head"><span data-i18n="ideaRecord">FİKİR KAYDI</span><button type="button" id="cancel" aria-label="Close">×</button></div>
       <input id="id" type="hidden">
-      <label>Fikir<input id="name" required></label>
-      <label>Problem / sinyal<textarea id="problem" required></textarea></label>
+      <label><span data-i18n="idea">Fikir</span><input id="name" required></label>
+      <label><span data-i18n="problemSignal">Problem / sinyal</span><textarea id="problem" required></textarea></label>
       <div class="two">
-        <label>Hedef müşteri<input id="customer"></label>
-        <label>Kategori<input id="category"></label>
+        <label><span data-i18n="customer">Hedef müşteri</span><input id="customer"></label>
+        <label><span data-i18n="categoryTitle">Kategori</span><input id="category"></label>
         <label>Subreddit<input id="subreddit"></label>
-        <label>Kaynak URL<input id="url" type="url"></label>
-        <label>Durum<select id="st"><option>İncele</option><option>İzle</option><option>Öncelikli</option><option>MVP</option><option>Arşiv</option></select></label>
-        <label>Kontrol aralığı<input id="interval" type="number" min="1" value="30"></label>
+        <label><span data-i18n="sourceUrl">Kaynak URL</span><input id="url" type="url"></label>
+        <label><span data-i18n="statusTitle">Durum</span><select id="st"><option value="İncele">İncele</option><option value="İzle">İzle</option><option value="Öncelikli">Öncelikli</option><option value="MVP">MVP</option><option value="Arşiv">Arşiv</option></select></label>
+        <label><span data-i18n="checkInterval">Kontrol aralığı</span><input id="interval" type="number" min="1" value="30"></label>
       </div>
-      <div class="score-title"><span>PUANLAMA / 1–5</span><strong><span id="live">0</span>/100</strong></div>
+      <div class="score-title"><span data-i18n="scoring">PUANLAMA / 1–5</span><strong><span id="live">0</span>/100</strong></div>
       <div id="scores" class="scores"></div>
-      <div class="form-actions"><button type="submit" class="primary">Kaydet →</button></div>
+      <div class="form-actions"><button type="submit" class="primary" data-i18n="save">Kaydet →</button></div>
     </form>
   </dialog>
 
