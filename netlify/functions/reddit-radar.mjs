@@ -15,4 +15,7 @@ export default async (req) => {
   }
 };
 
-export const config={path:'/api/reddit-radar'};
+export const config={
+  path:'/api/reddit-radar',
+  rateLimit:{windowSize:60,windowLimit:8,aggregateBy:['ip']}
+};
