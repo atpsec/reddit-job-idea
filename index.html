@@ -1,6 +1,73 @@
 <!doctype html>
-<html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Reddit Fırsat Radarı</title><link rel="stylesheet" href="styles.css"></head>
-<body><header><div><small>KİŞİSEL FIRSAT SİSTEMİ</small><h1>Reddit Fırsat Radarı</h1><p class="subtitle">Canlı Reddit sinyalleri + kendi fikir havuzun</p></div><div class="actions"><button id="refreshLive">Canlı yenile</button><button id="export">JSON dışa aktar</button><label>JSON içe aktar<input id="import" type="file" accept="application/json"></label><button id="add">+ Yeni fikir</button></div></header>
-<main><section id="stats" class="stats"></section><section class="toolbar"><input id="q" placeholder="Fikir, problem, müşteri veya subreddit ara..."><select id="cat"><option value="">Tüm kategoriler</option></select><select id="status"><option value="">Tüm durumlar</option></select></section><nav><button data-view="live" class="active">Canlı Akış</button><button data-view="dashboard">Dashboard</button><button data-view="all">Fikir Havuzu</button><button data-view="top10">Top 10</button><button data-view="review">Kontrol Zamanı</button></nav><section id="liveMeta" class="live-meta"></section><section id="grid" class="grid"></section></main>
-<dialog id="dlg"><form id="form"><h2>Fikir</h2><input id="id" type="hidden"><label>Fikir<input id="name" required></label><label>Problem / sinyal<textarea id="problem" required></textarea></label><div class="two"><label>Hedef müşteri<input id="customer"></label><label>Kategori<input id="category"></label><label>Subreddit<input id="subreddit"></label><label>Kaynak URL<input id="url" type="url"></label><label>Durum<select id="st"><option>İncele</option><option>İzle</option><option>Öncelikli</option><option>MVP</option><option>Arşiv</option></select></label><label>Kontrol aralığı<input id="interval" type="number" min="1" value="30"></label></div><h3>Puanlama (1–5)</h3><div id="scores" class="scores"></div><p>Skor: <strong id="live">0</strong>/100</p><div class="actions"><button type="button" id="cancel">Vazgeç</button><button type="submit">Kaydet</button></div></form></dialog>
-<script src="app.js"></script></body></html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f2efe6">
+  <title>Reddit Fırsat Radarı</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="masthead">
+    <div class="identity">
+      <div class="edition">ATPS / RESEARCH DESK — 01</div>
+      <h1>Reddit<br>Fırsat Radarı</h1>
+      <p class="subtitle">İnsanların şikâyet ettiği, para vermeye razı olduğu ve hâlâ kötü çözülen işleri ayıkla.</p>
+    </div>
+    <div class="header-side">
+      <div class="live-stamp"><span></span> CANLI KAYNAK</div>
+      <div class="actions">
+        <button id="refreshLive">Akışı yenile ↻</button>
+        <button id="export">Dışa aktar</button>
+        <label>İçe aktar<input id="import" type="file" accept="application/json"></label>
+        <button id="add" class="primary">Yeni fikir +</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="stats" class="stats" aria-label="Özet metrikler"></section>
+
+    <div class="workbench">
+      <nav aria-label="Görünümler">
+        <button data-view="live" class="active">01 / Canlı akış</button>
+        <button data-view="dashboard">02 / Özet</button>
+        <button data-view="all">03 / Fikir havuzu</button>
+        <button data-view="top10">04 / Top 10</button>
+        <button data-view="review">05 / Kontrol</button>
+      </nav>
+
+      <section class="toolbar">
+        <label class="search-field"><span>ARAMA</span><input id="q" placeholder="problem, ürün, müşteri, subreddit..."></label>
+        <label><span>KATEGORİ</span><select id="cat"><option value="">Tümü</option></select></label>
+        <label><span>DURUM</span><select id="status"><option value="">Tümü</option></select></label>
+      </section>
+    </div>
+
+    <section id="liveMeta" class="live-meta"></section>
+    <section id="grid" class="feed"></section>
+  </main>
+
+  <dialog id="dlg">
+    <form id="form">
+      <div class="dialog-head"><span>FİKİR KAYDI</span><button type="button" id="cancel" aria-label="Kapat">×</button></div>
+      <input id="id" type="hidden">
+      <label>Fikir<input id="name" required></label>
+      <label>Problem / sinyal<textarea id="problem" required></textarea></label>
+      <div class="two">
+        <label>Hedef müşteri<input id="customer"></label>
+        <label>Kategori<input id="category"></label>
+        <label>Subreddit<input id="subreddit"></label>
+        <label>Kaynak URL<input id="url" type="url"></label>
+        <label>Durum<select id="st"><option>İncele</option><option>İzle</option><option>Öncelikli</option><option>MVP</option><option>Arşiv</option></select></label>
+        <label>Kontrol aralığı<input id="interval" type="number" min="1" value="30"></label>
+      </div>
+      <div class="score-title"><span>PUANLAMA / 1–5</span><strong><span id="live">0</span>/100</strong></div>
+      <div id="scores" class="scores"></div>
+      <div class="form-actions"><button type="submit" class="primary">Kaydet →</button></div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
